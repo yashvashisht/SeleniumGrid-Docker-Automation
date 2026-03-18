@@ -1,0 +1,78 @@
+# Selenium Grid Setup with MULTIPLE CONTAINERS for Parallel Testing
+# This demonstrates how Docker enables running multiple tests simultaneously
+
+version: '3'
+
+services:
+  # The Grid Hub - Central coordinator that receives & distributes test requests
+  selenium-hub:
+    image: selenium/hub:4.41.0-20260222
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"  # Grid API port
+      - "4442:4442"  # Events port
+
+  # Chrome Browser Container 1 - Test Suite 1
+  chrome-1:
+    image: selenium/node-chrome:4.41.0-20260222
+    container_name: chrome-1
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_NODE_SESSION_TIMEOUT=300
+    ports:
+      - "7900:7900"  # VNC for Container 1
+
+  # Chrome Browser Container 2 - Test Suite 2
+  chrome-2:
+    image: selenium/node-chrome:4.41.0-20260222
+    container_name: chrome-2
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_NODE_SESSION_TIMEOUT=300
+    ports:
+      - "7901:7900"  # VNC for Container 2
+
+  # Chrome Browser Container 3 - Test Suite 3
+  chrome-3:
+    image: selenium/node-chrome:4.41.0-20260222
+    container_name: chrome-3
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_NODE_SESSION_TIMEOUT=300
+    ports:
+      - "7902:7900"  # VNC for Container 3
+
+  # Firefox Browser Container 1 - Test Suite 4
+  firefox-1:
+    image: selenium/node-firefox:4.41.0-20260222
+    container_name: firefox-1
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_NODE_SESSION_TIMEOUT=300
+    ports:
+      - "7903:7900"  # VNC for Container 4
+
+  # Firefox Browser Container 2 - Test Suite 5
+  firefox-2:
+    image: selenium/node-firefox:4.41.0-20260222
+    container_name: firefox-2
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_NODE_SESSION_TIMEOUT=300
+    ports:
+      - "7904:7900"  # VNC for Container 5

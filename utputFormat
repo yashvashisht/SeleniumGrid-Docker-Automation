@@ -1,0 +1,12 @@
+HTTP/1.1 500 Internal Server Error
+content-length: 2371
+content-type: application/json; charset=utf-8
+cache-control: none
+
+{
+  "value": {
+    "stacktrace": "org.openqa.selenium.json.JsonException: Unable to parse: {\\\n\tat org.openqa.selenium.json.Json.toType(Json.java:170)\n\tat org.openqa.selenium.json.Json.toType(Json.java:153)\n\tat org.openqa.selenium.grid.graphql.GraphqlHandler.execute(GraphqlHandler.java:140)\n\tat org.openqa.selenium.remote.http.Route$TemplatizedRoute.handle(Route.java:192)\n\tat org.openqa.selenium.remote.http.Route.execute(Route.java:69)\n\tat org.openqa.selenium.remote.http.Route$CombinedRoute.handle(Route.java:361)\n\tat org.openqa.selenium.remote.http.Route.execute(Route.java:69)\n\tat org.openqa.selenium.remote.AddWebDriverSpecHeaders.lambda$apply$0(AddWebDriverSpecHeaders.java:35)\n\tat org.openqa.selenium.remote.ErrorFilter.lambda$apply$0(ErrorFilter.java:44)\n\tat org.openqa.selenium.remote.http.Filter$1.execute(Filter.java:63)\n\tat org.openqa.selenium.remote.ErrorFilter.lambda$apply$0(ErrorFilter.java:44)\n\tat org.openqa.selenium.remote.http.Filter$1.execute(Filter.java:63)\n\tat org.openqa.selenium.netty.server.SeleniumHandler.lambda$channelRead0$0(SeleniumHandler.java:49)\n\tat java.base\u002fjava.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)\n\tat java.base\u002fjava.util.concurrent.FutureTask.run(FutureTask.java:317)\n\tat java.base\u002fjava.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)\n\tat java.base\u002fjava.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)\n\tat java.base\u002fjava.lang.Thread.run(Thread.java:1583)\nCaused by: org.openqa.selenium.json.JsonException: Unable to determine type from: \\. Last 2 characters read: {\\\nBuild info: version: '4.41.0', revision: '9fc754f90a'\nSystem info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.6.87.2-microsoft-standard-WSL2', java.version: '21.0.10'\nDriver info: driver.version: unknown\n\tat org.openqa.selenium.json.JsonInput.peek(JsonInput.java:169)\n\tat org.openqa.selenium.json.JsonInput.hasNext(JsonInput.java:326)\n\tat org.openqa.selenium.json.MapCoercer.lambda$apply$0(MapCoercer.java:73)\n\tat org.openqa.selenium.json.JsonTypeCoercer.coerce(JsonTypeCoercer.java:143)\n\tat org.openqa.selenium.json.Json.toType(Json.java:205)\n\tat org.openqa.selenium.json.Json.toType(Json.java:168)\n\t... 17 more\n",
+    "error": "unknown error",
+    "message": "Unable to parse: {\\"
+  }
+}

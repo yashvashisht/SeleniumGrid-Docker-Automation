@@ -1,0 +1,52 @@
+"""
+Example: How to build a custom Node image with extra tools installed.
+
+This Dockerfile:
+1. Starts with the official Selenium Node Chrome image
+2. Adds custom dependencies (e.g., curl, git)
+3. Installs a custom browser argument
+4. Can be built and used in docker-compose
+
+Step 1: Save this file as Dockerfile.custom in your project
+
+Step 2: Build the image:
+docker build -f Dockerfile.custom -t my-custom-node-chrome:1.0 .
+
+Step 3: Use it in docker-compose:
+services:
+  chrome:
+    image: my-custom-node-chrome:1.0  # Instead of selenium/node-chrome:...
+
+"""
+
+# Use official Selenium Chrome node as base
+FROM selenium/node-chrome:4.41.0-20260222
+
+# Run commands as root to install packages
+USER root
+
+# Install extra tools (optional)
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    git \
+    nano \
+    htop \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python (if you need to run Python scripts in the container)
+RUN apt-get update && apt-get install -y python3 python3-pip \
+    && pip3 install requests \
+    && rm -rf /var/lib/apt/lists/*
+
+# Add custom Chrome arguments (disable sandbox for testing)
+ENV SE_BROWSER_ARGS="--disable-sandbox"
+
+# Optional: Copy a custom config file into the container
+# COPY ./my-config.toml /etc/selenium/
+
+# Switch back to selenium user (for security)
+USER seluser
+
+# Default command (inherited from base image)
+# CMD starts the node browser
